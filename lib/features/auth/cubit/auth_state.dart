@@ -1,13 +1,41 @@
-abstract class AuthState {}
+import 'package:equatable/equatable.dart';
+
+import '../models/user_account.dart';
+
+abstract class AuthState extends Equatable {
+  const AuthState();
+
+  @override
+  List<Object?> get props => [];
+}
 
 class AuthInitial extends AuthState {}
 
 class AuthLoading extends AuthState {}
 
-class AuthSuccess extends AuthState {}
+class AuthAuthenticated extends AuthState {
+  final UserAccount user;
+
+  const AuthAuthenticated(this.user);
+
+  @override
+  List<Object?> get props => [user];
+}
+
+class AuthUnauthenticated extends AuthState {}
 
 class AuthError extends AuthState {
-  AuthError(this.message);
-
   final String message;
+  final AuthFieldError? fieldError;
+
+  const AuthError(this.message, {this.fieldError});
+
+  @override
+  List<Object?> get props => [message, fieldError];
+}
+
+enum AuthFieldError {
+  emailNotFound,
+  emailAlreadyExists,
+  passwordIncorrect,
 }
