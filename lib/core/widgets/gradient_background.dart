@@ -144,7 +144,7 @@ class _FireflyPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const count = 16;
+    const count = 30;
     final rand = math.Random(42);
 
     for (var i = 0; i < count; i++) {

@@ -18,9 +18,9 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: RouteNames.onboarding,   // 👈 TEMPORARY — test onboarding
+    initialLocation: RouteNames.splash,   
     routes: [
-      // ── Standalone screens (no bottom nav)
+      // ── Standalone screens 
       GoRoute(
         path: RouteNames.splash,
         builder: (context, state) => const SplashScreen(),
@@ -61,6 +61,7 @@ class AppRouter {
         ],
       ),
 
+      // ── Other standalone screens
       GoRoute(
         path: RouteNames.bookDetails,
         builder: (context, state) {
