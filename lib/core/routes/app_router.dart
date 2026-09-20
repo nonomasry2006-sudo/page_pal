@@ -9,6 +9,7 @@ import '../../features/explore/presentation/screens/explore_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/library/presentation/screens/library_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
+import '../../features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
 import '../../shared/main_shell.dart';
@@ -18,9 +19,9 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: RouteNames.onboarding,   // 👈 TEMPORARY — test onboarding
+    initialLocation: RouteNames.splash,
     routes: [
-      // ── Standalone screens (no bottom nav)
+      // ── Standalone screens 
       GoRoute(
         path: RouteNames.splash,
         builder: (context, state) => const SplashScreen(),
@@ -38,7 +39,7 @@ class AppRouter {
         builder: (context, state) => const SignupScreen(),
       ),
 
-      // ── Shell route (with bottom nav bar)
+      // ── Shell route 
       ShellRoute(
         builder: (context, state, child) => MainShell(child: child),
         routes: [
@@ -61,12 +62,17 @@ class AppRouter {
         ],
       ),
 
+      // ── Other standalone screens
       GoRoute(
         path: RouteNames.bookDetails,
         builder: (context, state) {
           final book = state.extra as BookModel;
           return BookDetailsScreen(book: book);
         },
+      ),
+      GoRoute(
+        path: RouteNames.editProfile,         
+        builder: (context, state) => const EditProfileScreen(),
       ),
       GoRoute(
         path: RouteNames.settings,

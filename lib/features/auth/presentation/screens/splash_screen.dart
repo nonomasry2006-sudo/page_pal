@@ -15,36 +15,44 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) context.go(RouteNames.onboarding);
-    });
+    _route();
+  }
+
+  Future<void> _route() async {
+    await Future.delayed(const Duration(seconds: 2));
+    if (!mounted) return;
+    context.go(RouteNames.onboarding);   
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
-      body: GradientBackground(
-        showFireflies: true,
-        child: Center(
+    return GradientBackground(
+      showFireflies: true,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                Icons.auto_stories_rounded,
-                size: 96,
+                Icons.menu_book_rounded,
+                size: 80,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               Text(
                 'PagePal',
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -0.5,
+                    ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Your reading companion',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white.withValues(alpha: 0.6),
+                    ),
               ),
             ],
           ),
